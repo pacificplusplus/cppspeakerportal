@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pacific++ Speaker Portal</title>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyB-lNjuYovQGWXWBia1BqQE5nw7_warObE",
+            authDomain: "pacificplusplus-1490525747638.firebaseapp.com",
+            databaseURL: "https://pacificplusplus-1490525747638.firebaseio.com",
+            projectId: "pacificplusplus-1490525747638",
+            storageBucket: "pacificplusplus-1490525747638.appspot.com",
+            messagingSenderId: "805609758"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/sticky-footer.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/assets/img/fav/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/img/fav/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/assets/img/fav/manifest.json">
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.css"/>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</head>
+
+<body class="bg-light">
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+
+    <h5 class="my-0 mr-md-auto font-weight-normal">Pacific++ Speaker Portal</h5>
+
+    <nav class="my-2 my-md-0 mr-md-3 nav nav-tabs">
+        <a class="p-2 text-dark" data-toggle="tab" href="#home">Home</a>
+        <a class="p-2 text-dark hide-when-logged-out" data-toggle="tab" href="#profile">Profile</a>
+        <a class="p-2 text-dark hide-when-logged-out" data-toggle="tab" href="#submissions">Submissions</a>
+        <a class="p-2 text-dark hide-when-logged-out" data-toggle="tab" href="#newsubmission">New Submission</a>
+    </nav>
+
+    <h6 id="logged-in-name" class="my-0 mx-3 font-weight-normal"></h6>
+    <a id="sign-out-button" class="btn btn-outline-primary hide-when-logged-out" href="#">Sign out</a>
+
+</div>
+
+<div class="container">
+    <div class="py-5">
+
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade show active">
+
+                <img class="d-block mx-auto mb-4" src="assets/img/logo.png" alt="">
+
+                <h1>Speaker Portal</h1>
+
+                <p class="lead">Pacific++ is a conference based around the C++ programming language.
+                    The conference is targeted at C++ professionals and enthusiasts in the pacific region. It is a high
+                    quality
+                    event where the primary goal is for participants to network and expand their knowledge as much as
+                    possible. Submissions close on the 17th of June 2018.</p>
+
+                <p class="lead">For further details about the conference, please check out the <a
+                        href="https://pacificplusplus.com" target="_blank"> main conference website.</a></p>
+
+                <h4>Expectations</h4>
+                <p>As a speaker, you will be required to produce a 75 minute quality talk ideally focused on C++ best
+                    practise, modern techniques, tooling and libraries. The talk can be on any specific topic of your
+                    choosing, but is subject to approval from the organizers.</p>
+
+                <p>If you want to have an opportunity for the audience to ask you questions after your talk, please
+                    factor this in to the 75 minutes.</p>
+
+                <h4>Remuneration, Benefits and Costs</h4>
+                <p>Benefits:
+                <ul>
+                    <li>Full conference access. This gives you a two day pass to the event with coffee, snacks and
+                        lunch
+                    </li>
+                    <li>Exposure on the Pacific++ website, including biography and photo</li>
+                    <li>Included in event marketing materials, emails and program guide</li>
+                    <li>Networking/business development opportunities</li>
+                </ul>
+                </p>
+
+                <p>
+                    Cost of transportation to the venue and your expenses for your stay here are the responsibility of
+                    the
+                    speaker or the speaker’s employer. If you would like to discuss other options, please email our team
+                    at
+                    info@pacificplusplus.com.
+                </p>
+
+                <div id="sign-in-container">
+                    <h1>Become a speaker</h1>
+                    Please sign in below to register your interest as a speaker.
+                    <div id="firebaseui-auth-container" style="display: none">
+
+                    </div>
+                </div>
+
+                <div>
+                    <hr/>
+                    <strong>
+                        If you would like to have your personal data removed from our system, or would like to request
+                        a copy of all personal information held by Pacific++, please email info@pacificplusplus.com with
+                        your request. See our <a href="privacy-policy.html">privacy policy</a> for more information.
+                    </strong>
+                </div>
+
+
+            </div>
+            <div id="profile" class="tab-pane fade">
+
+                <div id="profile-area" class="row">
+                    <div class="mb-3">
+
+                        <div id="profile-alert">
+
+                        </div>
+
+                        <h3>My Profile</h3>
+                        Please provide a public speaking bio that will be displayed on the conference website if
+                        your submission is selected.<br/>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Display Name</span>
+                        </div>
+                        <input id="bio-name" type="text" class="form-control" placeholder="Display name"
+                               aria-label="Display name"
+                               aria-describedby="basic-addon1"/>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon2">Twitter @</span>
+                        </div>
+                        <input id="bio-twitter" type="text" class="form-control" placeholder="optional"
+                               aria-label="Twitter"
+                               aria-describedby="basic-addon2"/>
+                    </div>
+                    <div class="input-group  mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Speakers Bio</span>
+                        </div>
+                        <textarea id="bio-text" rows="10" class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <p>Please describe your conference speaking experience as well as your expertise in C++ </p>
+                        <p>The information you provide will not be published, but will help in our selection process.
+                            Feel free to include links to online videos and/or slideshow presentations.</p>
+                    </div>
+
+                    <div class="input-group  mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Experience</span>
+                        </div>
+
+                        <textarea id="experience-text" rows="10" class="form-control"
+                                  aria-label="With textarea"></textarea>
+                    </div>
+
+
+                    <p>Your country for use on the conference website if your talk is accepted.</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon4">Country</span>
+                        </div>
+                        <input id="bio-country" type="text" class="form-control" placeholder="optional"
+                               aria-label="Twitter"
+                               aria-describedby="basic-addon2"/>
+                    </div>
+
+                    <p>A contact email address to let you know if your talk is accepted.</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon5">Contact email</span>
+                        </div>
+                        <input id="bio-contact" type="text" class="form-control" placeholder=""
+                               aria-label="Twitter"
+                               aria-describedby="basic-addon2"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <button id="save-profile-button" type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div id="submissions" class="tab-pane fade">
+                <h1>My Submissions</h1>
+                <br/>
+                <div id="my-submissions">
+                </div>
+            </div>
+            <div id="newsubmission" class="tab-pane fade">
+
+                <div id="submission-alert">
+
+                </div>
+
+                <div id="submission-area" class="row">
+
+                    <div class="col-md-8 order-md-1">
+                        <p>Important: Please make sure you have filled out your speaker profile before submitting your
+                            talk.</p>
+                        <h4 class="mb-3">Talk Submission</h4>
+                        <form id="submission-form" class="needs-validation" novalidate>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="talk-title">Title</label>
+                                    <input type="text" class="form-control" id="talk-title" placeholder="" value=""
+                                           required>
+                                    <div class="invalid-feedback">
+                                        Valid talk title is required.
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="talk-abstract">Abstract</label>
+                                    <textarea type="text" class="form-control" id="talk-abstract" placeholder=""
+                                              rows="5"> </textarea>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="talk-can-mentor">
+                                <label class="custom-control-label" for="talk-can-mentor">I am new to speaking, I would
+                                    like to
+                                    receiving
+                                    mentoring.</label>
+                            </div>
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="talk-want-mentor">
+                                <label class="custom-control-label" for="talk-want-mentor">I am an experienced speaker,
+                                    I am
+                                    available to
+                                    mentor others.</label>
+                            </div>
+
+                            <hr class="mb-4">
+
+                            <h4 class="mb-3">Session Level</h4>
+                            <div class="d-block my-3">
+                                <div class="custom-control custom-radio">
+                                    <input id="talk-audience-beginner" name="skillLevel" type="radio"
+                                           class="custom-control-input"
+                                           checked
+                                           required>
+                                    <label class="custom-control-label" for="talk-audience-beginner">Beginner</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="talk-audience-intermediate" name="skillLevel" type="radio"
+                                           class="custom-control-input"
+                                           required>
+                                    <label class="custom-control-label"
+                                           for="talk-audience-intermediate">Intermediate</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="talk-audience-advanced" name="skillLevel" type="radio"
+                                           class="custom-control-input"
+                                           required>
+                                    <label class="custom-control-label" for="talk-audience-advanced">Advanced</label>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <br/>
+        <br/>
+        <br/>
+
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2018 <a href="https://pacificplusplus.com/">Pacific++</a> - View our <a
+                href="privacy-policy.html" target="_blank">privacy policy</a>, or our <a
+                href="https://pacificplusplus.com/#codeofconduct_tab" target="_blank">code of conduct</a>.</p>
+    </footer>
+</div>
+
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+
+</html>
+
