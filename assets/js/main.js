@@ -71,7 +71,7 @@ initApp = function () {
                             $("#my-submissions").append("<h3>" + submission.title + "</h3>");
                             $("#my-submissions").append("<p class='lead'> Submitted: " + new Date(submission.date).toString() + "</p>");
                             $("#my-submissions").append("<p>Skill Level: " + submission.skillLevel + "</p>");
-                            $("#my-submissions").append("<p>" + submission.abstract + "</p>");
+                            $("#my-submissions").append("<pre>" + submission.abstract + "</pre>");
                             $("#my-submissions").append("<hr/>");
 
                         }).catch(function () {
